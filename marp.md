@@ -8,7 +8,7 @@ theme: default
 *Make your workflow matchier*
 
 Olaf Alders
-March 2021
+April 2021
 
 ---
 
@@ -27,6 +27,7 @@ but it matches on other things as well.
 * `VSCode` integration
 * `unset` environment variables
 * `history` search via `ctrl-r`
+* `source`
 
 ---
 
@@ -42,18 +43,11 @@ but it matches on other things as well.
 # Wait, install via `vim`?
 
 ```
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 ```
 
-Now, `fzf` will be installed for you via `:PlugInstall`
-
-Source key bindings and bash completion:
-
-```
-[ -f "$HOME"/.vim/plugged/fzf/shell/key-bindings.bash ] && source "$HOME"/.vim/plugged/fzf/shell/key-bindings.bash
-[ -f "$HOME"/.vim/plugged/fzf/shell/completion.bash ] && source "$HOME"/.vim/plugged/fzf/shell/completion.bash
-```
+Now, `fzf` will be installed for you via `:PlugInstall` and will add the necessary `source` to your shell config.
 
 ---
 
@@ -65,7 +59,7 @@ Install via command line:
 vim +'PlugInstall --sync' +qa
 ```
 
-Add the above command to your dot-files in order to automate your `fzf` installation.
+Add the above command to your dot files in order to automate your `fzf` installation.
 
 ---
 
@@ -80,6 +74,7 @@ Add the above command to your dot-files in order to automate your `fzf` installa
   > `macdown
   ```
   The above will select all processes running `MacDown`
+* Prefix a word with `!` to exclude a match
 * `<return>` to exit and pass selections to your command
 
 ---
