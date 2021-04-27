@@ -13,7 +13,9 @@
 
 ## Run and Access Container
 
-``
+```
+docker run --rm -it --volume $PWD/shared:/root/shared fzf-demo:latest /bin/bash
+```
 
 ## Acknowledgements
 
