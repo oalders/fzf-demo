@@ -12,6 +12,12 @@ April 2021
 
 ---
 
+# Playing Along
+
+Examples are at [https://github.com/oalders/fzf-demo](). See the README for examples on how to build and use the Docker container.
+
+---
+
 # Problem: It can be hard to find a thing
 
 ---
@@ -20,7 +26,6 @@ April 2021
 
 but it matches on other things as well.
 
-* files
 * `kill` integration
 * `ssh` integration
 * `vim` integration
@@ -63,7 +68,14 @@ Add the above command to your dot files in order to automate your `fzf` installa
 
 ---
 
-# Usage
+# Basic Usage
+
+* `fzf`
+* `fzf | xargs ls -l` 
+
+---
+
+# Navigating Output
 
 * `command **<tab>`
 * Use `<tab>` to select multiple lines
@@ -181,49 +193,4 @@ command! -bang GShowP
   \     fzf#wrap({ 'source': 'git diff-tree --no-commit-id --name-only HEAD~1' }, <bang>0)
   \   )
   \ )
-```
-
---- 
-
-# mm-psql
-```
-# mm-psql
-_fzf_complete_mm-psql() {
-  _fzf_complete --reverse --prompt="mm-psql> " -- "$@" < <(
-    echo gi-primary
-    echo gi-standby
-    echo log-primary
-    echo log-standby
-    echo mm-primary
-    echo mm-standby
-    echo monitoring-primary
-    echo monitoring-standby
-    echo monitoring-local-primary
-    echo monitoring-local-standby
-  )
-}
-
-_fzf_complete_mm-psql_post() {
-    awk '{print $1}'
-}
-
-[ -n "$BASH" ] && complete -F _fzf_complete_mm-psql -o default -o bashdefault mm-psql
-```
-
----
-
-# prove-this
-```
-# prove-this
-_fzf_complete_prove-this() {
-  _fzf_complete --reverse --multi --prompt="prove-this> " -- "$@" < <(
-      find t/lib -type f | grep TestFor
-  )
-}
-
-_fzf_complete_prove-this_post() {
-    awk '{print $1}'
-}
-
-[ -n "$BASH" ] && complete -F _fzf_complete_prove-this -o default -o bashdefault prove-this
 ```
