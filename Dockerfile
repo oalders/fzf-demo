@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:focal
 ENV DEBIAN_FRONTEND=noninteractive
 
 # https://github.com/sharkdp/bat/issues/938#issuecomment-646745610 for --force-overwrite
