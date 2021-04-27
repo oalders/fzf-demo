@@ -127,3 +127,103 @@ git log --oneline | fzf --multi --preview 'git show {+1}'
 `:Rg some text`
 
 ---
+# Customizing fzf
+
+```
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_DEFAULT_OPTS='--multi --pointer ">>"'
+```
+
+---
+# Wrapping fzf
+
+```
+f () {
+    fzf --bind='ctrl-/:toggle-preview' --preview "bat --style=numbers --color=always --line-range :500 {}" "$@"
+}
+```
+
+--- 
+# Starting at an arbitrary directory
+
+```
+find shared/ -type f|fzf
+```
+
+---
+# Custom choosers
+
+Simple: `shared/bash/simple-chooser.sh`
+
+More flexible: `shared/bash/commands.sh`
+
+---
+# Wrappers
+
+Wrapping 3rd party tools: `shared/bash/tmux.sh`
+
+---
+# Add completion to existing tools:
+
+`prove` wrapper: `shared/bash/prove-wrapper.sh`
+
+---
+# Custom vim commands
+
+```
+" Example without a preview window:
+command! GShow
+  \ call fzf#run({'source': 'git diff-tree --no-commit-id --name-only HEAD~1', 'sink': 'e'})
+
+command! -bang GShowP
+  \ call fzf#run(
+  \   fzf#vim#with_preview(
+  \     fzf#wrap({ 'source': 'git diff-tree --no-commit-id --name-only HEAD~1' }, <bang>0)
+  \   )
+  \ )
+```
+
+--- 
+
+# mm-psql
+```
+# mm-psql
+_fzf_complete_mm-psql() {
+  _fzf_complete --reverse --prompt="mm-psql> " -- "$@" < <(
+    echo gi-primary
+    echo gi-standby
+    echo log-primary
+    echo log-standby
+    echo mm-primary
+    echo mm-standby
+    echo monitoring-primary
+    echo monitoring-standby
+    echo monitoring-local-primary
+    echo monitoring-local-standby
+  )
+}
+
+_fzf_complete_mm-psql_post() {
+    awk '{print $1}'
+}
+
+[ -n "$BASH" ] && complete -F _fzf_complete_mm-psql -o default -o bashdefault mm-psql
+```
+
+---
+
+# prove-this
+```
+# prove-this
+_fzf_complete_prove-this() {
+  _fzf_complete --reverse --multi --prompt="prove-this> " -- "$@" < <(
+      find t/lib -type f | grep TestFor
+  )
+}
+
+_fzf_complete_prove-this_post() {
+    awk '{print $1}'
+}
+
+[ -n "$BASH" ] && complete -F _fzf_complete_prove-this -o default -o bashdefault prove-this
+```
