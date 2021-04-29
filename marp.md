@@ -112,6 +112,12 @@ git log --oneline | fzf --multi --preview 'git show {+1}'
 git reflog | fzf --preview 'git show {+1}'
 ```
 
+## Narrow down apt-cache search results
+
+```
+sudo apt-cache search tig | fzf
+```
+
 ---
 
 # vim
