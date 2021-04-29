@@ -106,6 +106,12 @@ Add the above command to your dot files in order to automate your `fzf` installa
 git log --oneline | fzf --multi --preview 'git show {+1}'
 ```
 
+## Browse your `git reflog`
+
+```
+git reflog | fzf --preview 'git show {+1}'
+```
+
 ---
 
 # vim
